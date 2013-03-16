@@ -66,11 +66,12 @@ angular.module('relevantWeb.services', [], function($provide) {
 
             console.log('Alchemy URLGetRankedKeywrods()');
             
-            String url = baseUrl + '/calls/url/URLGetRankedKeywords?apikey='+apiKey+'&outputMode=json&jsonp=JSON_CALLBACK&url='+url;
-            //if (url) {
-            //}
+            var reqUrl = baseUrl + '/calls/url/URLGetRankedKeywords?apikey='+apiKey+'&outputMode=json&jsonp=JSON_CALLBACK&url='+url;
+            if (url.indexOf('http://twitter.com') == 0) {
+                reqUrl += 'sourceText=xpath&xpath=//html/body/div/div[2]/div/div/div/div/p';
+            }
             
-            return $http.jsonp(url);
+            return $http.jsonp(reqUrl);
             //var kwds = {
                //"url": "http://traackr.com/blog/2013/03/how-to-use-influencer-marketing-to-launch-a-new-product/",
                //"language": "english",
