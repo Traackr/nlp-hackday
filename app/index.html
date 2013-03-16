@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" ng-app="relevantWeb">
+
+<head>
+   <meta charset="utf-8">
+   <title>My AngularJS App</title>
+   <link rel="stylesheet" href="css/app.css"/>
+</head>
+   
+<body>
+   
+   <div style="max-height: 500px; overflow: auto; border: 1px solid black;" when-scrolled="{{load_more_posts()}}">
+      <h2>The Relevant Web</h2>
+
+      <div ng-view></div>
+
+      <!-- In production use:
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+      -->
+      <script src="lib/angular/angular.js"></script>
+      <script src="js/app.js"></script>
+      <script src="js/services.js"></script>
+      <script src="js/controllers.js"></script>
+      <script src="js/filters.js"></script>
+      <script src="js/directives.js"></script>
+
+      <!-- Underscore.js -->
+      <script src="https://raw.github.com/documentcloud/underscore/master/underscore.js"></script>
+
+   </div>
+
+</body>
+
+</html>
+   

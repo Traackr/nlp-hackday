@@ -1,0 +1,59 @@
+<h3>Start a search</h3>
+
+<form ng-submit="add_keyword()">
+   <input type="text" id="kwd-input" ng-model="keyword" name="kwd-add"/>
+   <input type="submit" id="add-kwd-submit" value="Add"/>
+   <button ng-click="search_influencers()">
+      Search
+   </button>
+
+
+   <div>
+      <a href="" ng-click="clear_results()">Clear results</a>
+   </div>
+
+   <div class="keywords">
+      <ul>
+         <li class="keyword" ng-repeat="kwd in keywords_list">
+            {{kwd}} <a href="" ng-click="del_keyword(kwd)">X</a>
+         </li>
+      </ul>
+   </div>
+
+   <h4>Found {{influencers.length}} influencers</h4>
+   <div class="influencers">
+      <ul>
+         <li class="influencer" ng-repeat="inf in influencers">
+            <img width="24" height="24" ng-src="{{inf.thumbnail_url}}"/>
+            {{inf.name}}      
+         </li>
+      </ul>
+   </div>
+
+   <h4>Found {{posts.length}} posts</h4>
+   <div class="posts">
+      <ul>
+         <li class="post" ng-repeat="post in posts">
+            {{post.title}} <i>({{post.url}})</i>
+         </li>
+      </ul>
+   </div>
+
+   <h4>Posts previews</h4>
+   <div class="post_previews">
+      <ul>
+         <li class="post_preview" ng-repeat="preview in post_previews">
+            <table>
+               <tr>
+                  <td colspan="2"><h4>{{preview.title}}</h4></td>
+               </tr>
+               <tr>
+                  <td><img width="64" height="64" ng-src="{{preview.thumbnail_url}}" alt=""/></td>
+                  <td>{{preview.description}}</td>
+               </tr>
+            </table>
+         </li>
+      </ul>
+   </div>
+
+</form>
