@@ -79,8 +79,15 @@ function SearchController($scope, apiService, previewService) {
          console.log('Search results: ');
          console.log(data);
          // console.log(data.influencers)
-         $scope.influencers = data.influencers;
-         $scope.search_posts();
+         var limit = 10;
+         if (data.influencers < limit)
+            $scope.influencers = data.influencers;
+         else
+            $scope.influencers = data.influencers.slice(0, limit);
+            
+         for (var i = 0; i < $scope.influencers.length; i++) {
+            $scope.search_posts($scope.influencers[i]);
+         }
       });
 
    }; // End function search_influencers
@@ -88,22 +95,20 @@ function SearchController($scope, apiService, previewService) {
    /*
     * Search posts (for influencers found)
     */
-   $scope.search_posts = function() {
+   $scope.search_posts = function(influencer) {
 
       console.log('Launch posts search with: ');
       console.log($scope.keywords_list);
       // Launch search
-      var search_results = apiService.searchPosts($scope.keywords_list, _.pluck($scope.influencers, 'uid'));
+      var search_results = apiService.searchPosts($scope.keywords_list, [influencer['uid']]);
 
       // Assign results to model when available
       search_results.success(function(data){
-         console.log('Search results: ');
-         console.log(data);
-         // console.log(data.influencers)
-         $scope.posts = data.posts;
-         $scope.post_urls = _.pluck($scope.posts, 'url');
-         console.log('URLs size: ' + $scope.post_urls.length)
-         $scope.get_previews();
+         //console.log('Search results: ');
+         //console.log(data);
+         influencer['post_urls'] = _.pluck(data.posts, 'url');
+         console.log('Influencer Post URLs size: ' + influencer['post_urls'].length)
+         //$scope.get_previews();
       });
 
    }; // End function search_posts()
