@@ -23,7 +23,6 @@ function SearchController($scope, apiService, previewService, alchemyService) {
     * Add keywords
     */
    $scope.add_keyword = function() {
-    
       //console.log($scope);
       console.log('Adding keyword(s): ' + $scope.keyword);
       if ($scope.keyword) {
@@ -118,7 +117,26 @@ function SearchController($scope, apiService, previewService, alchemyService) {
 
    // Search alchemy for each influencer post URLs
    $scope.search_alchemy = function() {
-   } // End search_alchemy()
+        console.log('Launch alchemy search');
+        for (var i = 0; i < $scope.influencers.length; i++) {
+             
+             var influencer = $scope.influencers[i];
+             influencer['keyword_extractions'] = [];
+             
+             for (var j = 0; j < influencer['post_urls'].length; j++) {
+                var postUrl = influencer['post_urls'][j];
+                console.log('Alchemy search for: ' + postUrl);
+                
+                var handler = alchemyService.extractKeywords(postUrl);
+                handler.success(function(data) {
+                    var kws = _.pluck(data.keywords, 'text');
+                    influencer['keyword_extractions'] = _.uniq(influencer['keyword_extractions'].concat(kws));
+                });
+                
+             } // end inner-postURL loop
+        } // end outer-inf loop
+        
+   }; // End search_alchemy()
 
    /*
     * Get Embed.ly preview object for posts
@@ -163,4 +181,4 @@ function SearchController($scope, apiService, previewService, alchemyService) {
 
 } // End controller SearchController
 
-SearchController.$inject = ['$scope', 'apiService', 'previewService'];
+SearchController.$inject = ['$scope', 'apiService', 'previewService', 'alchemyService'];

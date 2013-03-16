@@ -23,7 +23,7 @@ angular.module('relevantWeb.services', [], function($provide) {
             console.log(influencerUids);
             var q = keywords.map(escape).join(',');
             var i = influencerUids.map(escape).join(',');
-            return $http.get('http://nlp-hackday.traackr.com/1.0/posts/search?count=10&keywords='+q+'&influencers='+i);
+            return $http.get('http://nlp-hackday.traackr.com/1.0/posts/search?count=1&keywords='+q+'&influencers='+i);
          } // End function search()
 
       }; // End API object
@@ -65,18 +65,23 @@ angular.module('relevantWeb.services', [], function($provide) {
          extractKeywords: function(url) {
 
             console.log('Alchemy URLGetRankedKeywrods()');
-            //return $http.jsonp(baseUrl + '/calls/url/URLGetRankedKeywords?apikey='+apiKey+'&outputMode=json&jsonp=JSON_CALLBACK&url='+url);
-            var kwds = {
-               "url": "http://traackr.com/blog/2013/03/how-to-use-influencer-marketing-to-launch-a-new-product/",
-               "language": "english",
-               "keywords": [
-                  {
-                     "text": "influencers",
-                     "relevance": "0.949607"
-                  }
-               ]
-            };
-            return kwds
+            
+            String url = baseUrl + '/calls/url/URLGetRankedKeywords?apikey='+apiKey+'&outputMode=json&jsonp=JSON_CALLBACK&url='+url;
+            //if (url) {
+            //}
+            
+            return $http.jsonp(url);
+            //var kwds = {
+               //"url": "http://traackr.com/blog/2013/03/how-to-use-influencer-marketing-to-launch-a-new-product/",
+               //"language": "english",
+               //"keywords": [
+                 // {
+                    // "text": "influencers",
+                  //   "relevance": "0.949607"
+                //  }
+              // ]
+            //};
+            //return kwds
          } // 
 
       }; // End api object
