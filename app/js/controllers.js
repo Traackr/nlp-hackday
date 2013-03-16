@@ -150,6 +150,7 @@ function SearchController($scope, apiService, previewService, alchemyService) {
 
   $scope.get_keyword_intersection = function () {
      console.log('Getting keyword intersection');
+     $scope.common_kws = [];
      var xxx = $scope.common_kws.concat($scope.influencers[0]['keyword_extractions']);
      for (var i = 1; i < $scope.influencers.length; i++) {
         xxx = _.intersection(xxx, $scope.influencers[i]['keyword_extractions']);
@@ -195,6 +196,7 @@ function SearchController($scope, apiService, previewService, alchemyService) {
       $scope.influencers = [];
       $scope.posts = [];
       $scope.influencer_post_fetch_count = 0;
+      $scope.common_kws = [];
    }; // End function clear_results
 
 

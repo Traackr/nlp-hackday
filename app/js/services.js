@@ -58,7 +58,7 @@ angular.module('relevantWeb.services', [], function($provide) {
    $provide.factory('alchemyService', function($http) {
 
       var baseUrl = 'http://access.alchemyapi.com';
-      var apiKey = 'c031c724dace22dafddbd13b520ca7f19ce9d0ee';
+      var apiKey = '7210717c9550f7577343e126c1506509a8526681';
       var api = {
 
          // Get keywords for a post URL

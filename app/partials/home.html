@@ -33,12 +33,13 @@
       </div>
       
       <button ng-click="search_alchemy()" ng-show="influencer_post_fetch_count==10" class="btn-primary">
-        Entity Extraction
+        Keyword Extraction
       </button>
+      <br/><br/>
       
       <div class="influencers row">
         <div class="span1"></div> 
-        <div class="span1" ng-repeat="inf in influencers" style="width:75px;">
+        <div class="span1" ng-repeat="inf in influencers">
             <div ng-repeat="k in inf.keyword_extractions">
                <span ng-class-odd="'odd'" ng-class-even="'even'">{{k}}</span><br/>
             </div>
@@ -47,15 +48,15 @@
       </div>
    </div>
 
-   <p class="text-success">
-       <button ng-click="get_keyword_intersection()" ng-show="(null != influencers[0] && null != influencers[0]['keyword_extractions'])" class="btn-primary">
+   <div style="display:none;">
+      <button ng-click="get_keyword_intersection()" ng-show="(null != influencers[0] && null != influencers[0]['keyword_extractions'])" class="btn-primary">
            Keyword Intersection?
        </button>
        <div ng-repeat="kw in common_kws">
            {{kw}}
        </div>
-     </p>
-
+   </div>
+   
    <div class="post_previews">
       <ul>
          <li class="post_preview" ng-repeat="preview in post_previews">
