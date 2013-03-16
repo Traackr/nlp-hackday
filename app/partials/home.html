@@ -1,3 +1,7 @@
+<style>
+   .odd { margin: 2px 2px 4px 2px; padding: 2px; background-color: #eee; }
+   .even { margin: 2px 2px 4px 2px; padding: 2px; background-color: #ccc; }
+</style>
 <form ng-submit="add_keyword()">
    <div class="text-center">
       <input type="text" id="kwd-input" ng-model="keyword" name="kwd-add" placeholder="Add keyword..."/>
@@ -36,12 +40,21 @@
         <div class="span1"></div> 
         <div class="span1" ng-repeat="inf in influencers" style="width:75px;">
             <div ng-repeat="k in inf.keyword_extractions">
-               {{k}}<br/>
+               <span ng-class-odd="'odd'" ng-class-even="'even'">{{k}}</span><br/>
             </div>
         </div>
         <div class="span1"></div>
       </div>
    </div>
+
+   <p class="text-success">
+       <button ng-click="get_keyword_intersection()" ng-show="(null != influencers[0] && null != influencers[0]['keyword_extractions'])" class="btn-primary">
+           Keyword Intersection?
+       </button>
+       <div ng-repeat="kw in common_kws">
+           {{kw}}
+       </div>
+     </p>
 
    <div class="post_previews">
       <ul>
