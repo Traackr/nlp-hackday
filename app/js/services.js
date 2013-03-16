@@ -23,7 +23,7 @@ angular.module('relevantWeb.services', [], function($provide) {
             console.log(influencerUids);
             var q = keywords.map(escape).join(',');
             var i = influencerUids.map(escape).join(',');
-            return $http.get('http://nlp-hackday.traackr.com/1.0/posts/search?count=1&keywords='+q+'&influencers='+i);
+            return $http.get('http://nlp-hackday.traackr.com/1.0/posts/search?count=10&keywords='+q+'&influencers='+i);
          } // End function search()
 
       }; // End API object
@@ -62,16 +62,19 @@ angular.module('relevantWeb.services', [], function($provide) {
       var api = {
 
          // Get keywords for a post URL
-         extractKeywords: function(url) {
+         extractKeywords: function(url, index) {
 
             console.log('Alchemy URLGetRankedKeywrods()');
             
             var reqUrl = baseUrl + '/calls/url/URLGetRankedKeywords?apikey='+apiKey+'&outputMode=json&jsonp=JSON_CALLBACK&url='+url;
             if (url.indexOf('http://twitter.com') == 0) {
-                reqUrl += 'sourceText=xpath&xpath=//html/body/div/div[2]/div/div/div/div/p';
+                reqUrl += '&sourceText=xpath&xpath=//html/body/div/div[2]/div/div/div/div/p';
             }
-            
-            return $http.jsonp(reqUrl);
+            var rez = $http.jsonp(reqUrl);
+            rez.success(function(data) {
+               data.index = index;
+            });
+            return rez;
             //var kwds = {
                //"url": "http://traackr.com/blog/2013/03/how-to-use-influencer-marketing-to-launch-a-new-product/",
                //"language": "english",

@@ -127,10 +127,13 @@ function SearchController($scope, apiService, previewService, alchemyService) {
                 var postUrl = influencer['post_urls'][j];
                 console.log('Alchemy search for: ' + postUrl);
                 
-                var handler = alchemyService.extractKeywords(postUrl);
+                var handler = alchemyService.extractKeywords(postUrl, i);
                 handler.success(function(data) {
+                    console.log('Post: ' + data.url);
+                    console.log('Results for: '+ data.index);
                     var kws = _.pluck(data.keywords, 'text');
-                    influencer['keyword_extractions'] = _.uniq(influencer['keyword_extractions'].concat(kws));
+                    console.log('Kwds: ' + kws);
+                    $scope.influencers[data.index]['keyword_extractions'] = _.uniq($scope.influencers[data.index]['keyword_extractions'].concat(kws));
                 });
                 
              } // end inner-postURL loop
