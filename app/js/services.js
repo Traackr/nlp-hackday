@@ -13,7 +13,7 @@ angular.module('relevantWeb.services', [], function($provide) {
             console.log('API search influencers: ');
             console.log(keywords);
             var q = keywords.map(escape).join(',');
-            return $http.get('http://nlp-hackday.traackr.com/1.0/influencers/search?count=25&keywords='+q+'&root_urls_exclusive=twitter');
+            return $http.get('http://nlp-hackday.traackr.com/1.0/influencers/search?count=10&keywords='+q+'&root_urls_exclusive=twitter');
          }, // End function search()
 
          // Influencers search
@@ -47,12 +47,40 @@ angular.module('relevantWeb.services', [], function($provide) {
             return $http.get('http://api.embed.ly/1/oembed?key='+apiKey+'&urls='+u);
          } // End function getPreview()
 
-      } // End API object
+      }; // End API object
 
-      // Factory method retiurns API objetc
+      // Factory method returns API objetc
       return api;
 
    }); // End Embed.ly API
 
+   // Alchemy API service
+   $provice.factory('alchemy', function($http) {
+
+      var apiKey = '9c289a3a07bd29bbbfac4ac7405aaf98b5e0793b';
+      var api = {
+
+         // Get keywords for a post URL
+         extractKeywords: function(url) {
+
+            var kwds = {
+               "url": "http://traackr.com/blog/2013/03/how-to-use-influencer-marketing-to-launch-a-new-product/",
+               "language": "english",
+               "keywords": [
+                  {
+                     "text": "influencers",
+                     "relevance": "0.949607"
+                  }
+               ]
+            };
+            return kwds
+         } // 
+
+      }; // End api object
+
+      // Factory method returns API object
+      return api;
+
+   });
 
 }); // End services module
