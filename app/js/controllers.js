@@ -79,7 +79,12 @@ function SearchController($scope, apiService, previewService) {
          console.log('Search results: ');
          console.log(data);
          // console.log(data.influencers)
-         $scope.influencers = data.influencers;
+         var limit = 10;
+         if (data.influencers < limit)
+            $scope.influencers = data.influencers;
+         else
+            $scope.influencers = data.influencers.slice(0, limit);
+            
          for (var i = 0; i < $scope.influencers.length; i++) {
             $scope.search_posts($scope.influencers[i]);
          }

@@ -13,7 +13,7 @@ angular.module('relevantWeb.services', [], function($provide) {
             console.log('API search influencers: ');
             console.log(keywords);
             var q = keywords.map(escape).join(',');
-            return $http.get('http://nlp-hackday.traackr.com/1.0/influencers/search?count=10&keywords='+q);
+            return $http.get('http://nlp-hackday.traackr.com/1.0/influencers/search?count=25&keywords='+q);
          }, // End function search()
 
          // Influencers search
@@ -23,7 +23,7 @@ angular.module('relevantWeb.services', [], function($provide) {
             console.log(influencerUids);
             var q = keywords.map(escape).join(',');
             var i = influencerUids.map(escape).join(',');
-            return $http.get('http://nlp-hackday.traackr.com/1.0/posts/search?count=50&keywords='+q+'&influencers='+i);
+            return $http.get('http://nlp-hackday.traackr.com/1.0/posts/search?count=10&keywords='+q+'&influencers='+i);
          } // End function search()
 
       }; // End API object
