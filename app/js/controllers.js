@@ -11,7 +11,9 @@ function SearchController($scope, apiService, previewService, alchemyService) {
    // Influencers found
    $scope.influencers = [];
    $scope.influencer_post_fetch_count = 0;
-   
+
+  $scope.common_kws = [];
+
    // Posts found
    $scope.posts = [];
    $scope.post_urls = [];
@@ -145,6 +147,15 @@ function SearchController($scope, apiService, previewService, alchemyService) {
         } // end outer-inf loop
         
    }; // End search_alchemy()
+
+  $scope.get_keyword_intersection = function () {
+     console.log('Getting keyword intersection');
+     var xxx = $scope.common_kws.concat($scope.influencers[0]['keyword_extractions']);
+     for (var i = 1; i < $scope.influencers.length; i++) {
+        xxx = _.intersection(xxx, $scope.influencers[i]['keyword_extractions']);
+     }
+     $scope.common_kws = xxx;
+   }
 
    /*
     * Get Embed.ly preview object for posts
