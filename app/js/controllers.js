@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-function SearchController($scope, apiService, previewService) {
+function SearchController($scope, apiService, previewService, alchemyService) {
 
    
    $scope.keywords_list = [];
