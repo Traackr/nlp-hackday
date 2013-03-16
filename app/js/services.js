@@ -55,7 +55,7 @@ angular.module('relevantWeb.services', [], function($provide) {
    }); // End Embed.ly API
 
    // Alchemy API service
-   $provide.factory('alchemy', function($http) {
+   $provide.factory('alchemyService', function($http) {
 
       var baseUrl = 'http://access.alchemyapi.com';
       var apiKey = '9c289a3a07bd29bbbfac4ac7405aaf98b5e0793b';
