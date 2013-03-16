@@ -10,6 +10,8 @@ function SearchController($scope, apiService, previewService) {
 
    // Influencers found
    $scope.influencers = [];
+   $scope.influencer_post_fetch_count = 0;
+   
    // Posts found
    $scope.posts = [];
    $scope.post_urls = [];
@@ -108,11 +110,15 @@ function SearchController($scope, apiService, previewService) {
          //console.log(data);
          influencer['post_urls'] = _.pluck(data.posts, 'url');
          console.log('Influencer Post URLs size: ' + influencer['post_urls'].length)
+         $scope.influencer_post_fetch_count++;
          //$scope.get_previews();
       });
 
    }; // End function search_posts()
 
+   // Search alchemy for each influencer post URLs
+   $scope.search_alchemy = function() {
+   } // End search_alchemy()
 
    /*
     * Get Embed.ly preview object for posts
@@ -151,7 +157,7 @@ function SearchController($scope, apiService, previewService) {
    var clear_results = function() {
       $scope.influencers = [];
       $scope.posts = [];
-
+      $scope.influencer_post_fetch_count = 0;
    }; // End function clear_results
 
 

@@ -2,7 +2,7 @@
    <div class="text-center">
       <input type="text" id="kwd-input" ng-model="keyword" name="kwd-add" placeholder="Add keyword..."/>
       <input type="submit" id="add-kwd-submit" value="Add"/>
-      <button ng-click="search_influencers()">
+      <button ng-click="search_influencers()" class="btn-primary">
          Search
       </button>
 
@@ -23,14 +23,24 @@
         <div class="span1"></div>
         <div class="span1" ng-repeat="inf in influencers">
             <img width="48" height="48" ng-src="{{inf.thumbnail_url}}"/> <br/>
-            {{inf.name}} <br/>
-            {{inf.post_urls.length}}  
+            {{inf.name}}
+        </div>
+        <div class="span1"></div>
+      </div>
+      
+      <button ng-click="search_alchemy()" ng-show="influencer_post_fetch_count==10" class="btn-primary">
+        Entity Extraction
+      </button>
+      
+      <div class="influencers row">
+        <div class="span1"></div>
+        <div class="span1" ng-repeat="inf in influencers">
+            {{inf.keyword_extractions}}
         </div>
         <div class="span1"></div>
       </div>
    </div>
 
-   <h4>Posts previews</h4>
    <div class="post_previews">
       <ul>
          <li class="post_preview" ng-repeat="preview in post_previews">
