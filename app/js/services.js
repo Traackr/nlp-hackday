@@ -23,7 +23,7 @@ angular.module('relevantWeb.services', [], function($provide) {
             console.log(influencerUids);
             var q = keywords.map(escape).join(',');
             var i = influencerUids.map(escape).join(',');
-            return $http.get('http://nlp-hackday.traackr.com/1.0/posts/search?count=10&keywords='+q+'&influencers='+i);
+            return $http.get('http://nlp-hackday.traackr.com/1.0/posts/search?count=5&keywords='+q+'&influencers='+i);
          } // End function search()
 
       }; // End API object
@@ -58,7 +58,7 @@ angular.module('relevantWeb.services', [], function($provide) {
    $provide.factory('alchemyService', function($http) {
 
       var baseUrl = 'http://access.alchemyapi.com';
-      var apiKey = '9c289a3a07bd29bbbfac4ac7405aaf98b5e0793b';
+      var apiKey = 'c031c724dace22dafddbd13b520ca7f19ce9d0ee';
       var api = {
 
          // Get keywords for a post URL

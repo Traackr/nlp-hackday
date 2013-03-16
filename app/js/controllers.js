@@ -125,14 +125,19 @@ function SearchController($scope, apiService, previewService, alchemyService) {
              
              for (var j = 0; j < influencer['post_urls'].length; j++) {
                 var postUrl = influencer['post_urls'][j];
-                console.log('Alchemy search for: ' + postUrl);
                 
                 var handler = alchemyService.extractKeywords(postUrl, i);
                 handler.success(function(data) {
-                    console.log('Post: ' + data.url);
-                    console.log('Results for: '+ data.index);
-                    var kws = _.pluck(data.keywords, 'text');
-                    console.log('Kwds: ' + kws);
+                    // Filtering function                    
+                    var f = function(k) {
+                      // return parseFloat(k.relevance) > 0.5;
+                      return (parseFloat(k.relevance) > 0.5 && k.text.indexOf('http') == -1);
+                    };
+                    // Transform keywords
+                    var t = function(k) {
+                      return k.toLowerCase();
+                    }
+                    var kws = _.map(_.pluck(_.filter(data.keywords, f), 'text'), t);
                     $scope.influencers[data.index]['keyword_extractions'] = _.uniq($scope.influencers[data.index]['keyword_extractions'].concat(kws));
                 });
                 
