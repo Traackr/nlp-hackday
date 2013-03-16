@@ -12,3 +12,22 @@
 //     }));
 //   });
 // });
+
+// describe('relevantWeb.services', function() {
+
+//    var scope, api, $http;
+
+//    beforeEach(function() {
+//       module('relevantWeb.services');
+//       inject(function($rootScope, $injector) {
+//          scope = $rootScope.$new();
+//          api = $injector.get('apiService');
+//          $http = $injector.get('$httpBackend');
+//       });
+//    });
+
+//    it('influencers search returns 10 results', function() {
+//       expect(api.searchInfluencers(['traackr']).length).toBe(10);
+//    });
+
+// });

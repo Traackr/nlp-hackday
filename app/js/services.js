@@ -55,14 +55,17 @@ angular.module('relevantWeb.services', [], function($provide) {
    }); // End Embed.ly API
 
    // Alchemy API service
-   $provice.factory('alchemy', function($http) {
+   $provide.factory('alchemy', function($http) {
 
+      var baseUrl = 'http://access.alchemyapi.com';
       var apiKey = '9c289a3a07bd29bbbfac4ac7405aaf98b5e0793b';
       var api = {
 
          // Get keywords for a post URL
          extractKeywords: function(url) {
 
+            console.log('Alchemy URLGetRankedKeywrods()');
+            //return $http.jsonp(baseUrl + '/calls/url/URLGetRankedKeywords?apikey='+apiKey+'&outputMode=json&jsonp=JSON_CALLBACK&url='+url);
             var kwds = {
                "url": "http://traackr.com/blog/2013/03/how-to-use-influencer-marketing-to-launch-a-new-product/",
                "language": "english",
